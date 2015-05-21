@@ -57,6 +57,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DecimalTests.cs" />
     <Compile Include="DictionaryTests.cs" />
     <Compile Include="StringTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
