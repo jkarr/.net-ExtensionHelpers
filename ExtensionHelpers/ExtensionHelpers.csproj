@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Datetime.cs" />
     <Compile Include="Decimal.cs" />
     <Compile Include="Dictionary.cs" />
     <Compile Include="Enum.cs" />
