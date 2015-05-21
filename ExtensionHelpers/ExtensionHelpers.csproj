@@ -48,6 +48,7 @@
     <Compile Include="Dictionary.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="List.cs" />
+    <Compile Include="Number.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="String.cs" />
   </ItemGroup>
