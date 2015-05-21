@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using ExtensionHelpers;
 
-namespace ExtensionHelpersTests
+namespace ExtensionHelpers.Tests
 {
     [TestClass]
     public class ListTests
