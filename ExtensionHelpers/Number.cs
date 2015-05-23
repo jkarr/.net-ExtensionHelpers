@@ -7,14 +7,28 @@ namespace ExtensionHelpers
 {
     public static partial class ExtensionHelpers
     {
-        public static bool IsBetween(this long l, long a, long b)
+        /// <summary>
+        /// Determines if a number falls between two other numbers.
+        /// </summary>
+        /// <param name="number">The number to compare.</param>
+        /// <param name="first">The first number.</param>
+        /// <param name="second">The second number.</param>
+        /// <returns>True if the given number is between the first and second numbers.</returns>
+        public static bool IsBetween(this long number, long first, long second)
         {
-            return l >= a && l <= b;
+            return number >= first && number <= second;
         }
 
-        public static bool IsBetween(this int i, int a, int b)
+        /// <summary>
+        /// Determines if a number falls between two other numbers.
+        /// </summary>
+        /// <param name="number">The number to compare.</param>
+        /// <param name="first">The first number.</param>
+        /// <param name="second">The second number.</param>
+        /// <returns>True if the given number is between the first and second numbers.</returns>
+        public static bool IsBetween(this int number, int first, int second)
         {
-            return i >= a && i <= b;
+            return number >= first && number <= second;
         }
     }
 }
