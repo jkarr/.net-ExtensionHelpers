@@ -21,6 +21,12 @@ namespace ExtensionHelpers.Tests
         }
 
         [TestMethod()]
+        public void BetweenDateTimeTestBackwards()
+        {
+            Assert.IsTrue(someBack.IsBetween(future, wayBack));
+        }
+
+        [TestMethod()]
         public void IsBeforeOrEqualeDateTimeTest()
         {
             Assert.IsTrue(wayBack.IsBeforeOrEqual(future));

@@ -16,7 +16,7 @@ namespace ExtensionHelpers
         /// <returns>True if the given number is between the first and second numbers.</returns>
         public static bool IsBetween(this long number, long first, long second)
         {
-            return number >= first && number <= second;
+            return (number >= first && number <= second) || (number <= first && number >= second);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace ExtensionHelpers
         /// <returns>True if the given number is between the first and second numbers.</returns>
         public static bool IsBetween(this int number, int first, int second)
         {
-            return number >= first && number <= second;
+            return (number >= first && number <= second) || (number <= first && number >= second);
         }
     }
 }

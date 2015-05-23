@@ -16,7 +16,7 @@ namespace ExtensionHelpers
         /// <returns>True if the given datetime is between the first and second datetimes.  False if not.</returns>
         public static bool IsBetween(this DateTime dateTime, DateTime first, DateTime second)
         {
-            return dateTime >= first && dateTime <= second;
+            return (dateTime >= first && dateTime <= second) || (dateTime <= first && dateTime >= second);
         }
 
         /// <summary>
