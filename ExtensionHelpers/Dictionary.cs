@@ -53,5 +53,20 @@ namespace ExtensionHelpers
 
             return newDictionary;
         }
+
+        public static void AddIfNotExists<T1, T2>(this IDictionary<T1, T2> dictionary, T1 key, T2 value, bool overrideExisting = false)
+        {
+            if (dictionary.ContainsKey(key))
+            {
+                if(overrideExisting)
+                {
+                    dictionary[key] = value;
+                }
+            }
+            else
+            {
+                dictionary.Add(key, value);
+            }
+        }
     }
 }

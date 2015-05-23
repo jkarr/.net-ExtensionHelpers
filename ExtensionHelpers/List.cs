@@ -17,5 +17,13 @@ namespace ExtensionHelpers
 
             return newList;
         }
+
+        public static void AddIfNotExists<T>(this IList<T> list, T value)
+        {
+            if(!list.Contains(value))
+            {
+                list.Add(value);
+            }
+        }
     }
 }
