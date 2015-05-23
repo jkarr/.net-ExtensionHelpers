@@ -8,7 +8,7 @@ namespace ExtensionHelpers.Tests
     [TestClass()]
     public class DictionaryTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void SerializeDictionaryTest()
         {
             var list = testDictionary.Serialize();
@@ -33,21 +33,33 @@ namespace ExtensionHelpers.Tests
         }
 
         [TestMethod]
-        public void CopyByValueDictionary()
+        public void CopyByValueDictionaryTest()
         {
             var newDictionary = testDictionary.CopyByValue();
             Assert.IsFalse(Object.ReferenceEquals(newDictionary, testDictionary));
             Assert.IsTrue(newDictionary.Count == testDictionary.Count);
         }
 
-        private void scrubData()
+        [TestMethod]
+        public void AddIfNotExistsDictionaryTestKeyExistsNoOverride()
         {
-            testDictionary = new Dictionary<int, string>
-            {
-                { 1, "Bob" },
-                { 2, "Alice" },
-                { 3, "John" }
-            };
+            testDictionary.AddIfNotExists(1, "John", false);
+            Assert.IsFalse(testDictionary[1] == "John");
+        }
+
+        [TestMethod]
+        public void AddIfNotExistsDictionaryTestKeyExistsOverride()
+        {
+            testDictionary.AddIfNotExists(1, "John", true);
+            Assert.IsTrue(testDictionary[1] == "John");
+        }
+
+        [TestMethod]
+        public void AddIfNotExistsDictionaryTestKeyDoesNotExist()
+        {
+            testDictionary.AddIfNotExists(4, "Amy");
+            Assert.IsTrue(testDictionary.Count == 4);
+            Assert.IsTrue(testDictionary.ContainsKey(4) && testDictionary[4] == "Amy");
         }
 
         private Dictionary<int, string> testDictionary = new Dictionary<int, string>
