@@ -20,9 +20,21 @@ namespace ExtensionHelpers.Tests
         }
 
         [TestMethod()]
+        public void IsBetweenNumberLongTestBackwards()
+        {
+            Assert.IsTrue(l.IsBetween(999999, 1));
+        }
+
+        [TestMethod()]
         public void IsBetweenNumberIntTest()
         {
             Assert.IsTrue(i.IsBetween(1, 999));
+        }
+
+        [TestMethod()]
+        public void IsBetweenNumberIntTestBackwards()
+        {
+            Assert.IsTrue(i.IsBetween(999, 1));
         }
     }
 }
