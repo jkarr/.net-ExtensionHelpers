@@ -54,6 +54,13 @@ namespace ExtensionHelpers
             return newDictionary;
         }
 
+        /// <summary>
+        /// Adds a value if the key doesn't already exist in the collection.  Optionally overwrite if the value does exist.
+        /// </summary>
+        /// <param name="dictionary">The dictionary to add to.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The pair.</param>
+        /// <param name="overrideExisting">If true, override the value for the found key.  If false, do not override.  Only taken into account if the key already exists.</param>
         public static void AddIfNotExists<T1, T2>(this IDictionary<T1, T2> dictionary, T1 key, T2 value, bool overrideExisting = false)
         {
             if (dictionary.ContainsKey(key))
