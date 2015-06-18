@@ -18,6 +18,18 @@ namespace ExtensionHelpers
         }
 
         /// <summary>
+        /// Convers a List of KeyValuePair back to a Dictionary.
+        /// </summary>
+        /// <param name="list">The list that represents a serialized dictionary</param>
+        /// <returns>A dictionary</returns>
+        public static Dictionary<T1, T2> DeSerialize<T1, T2>(this List<KeyValuePair<T1, T2>> list)
+        {
+            Dictionary<T1, T2> dictionary = new Dictionary<T1, T2>();
+            dictionary.AddRange(list.ToDictionary(k => k.Key, k => k.Value));
+            return dictionary;
+        }
+
+        /// <summary>
         /// Add a range of KeyValuePairs to the dictionary
         /// </summary>
         /// <param name="dictionary">The dictionary to add to.</param>
@@ -27,17 +39,7 @@ namespace ExtensionHelpers
         {
             foreach(var entry in entries)
             {
-                if(dictionary.ContainsKey(entry.Key))
-                {
-                    if(overrideEntries)
-                    {
-                        dictionary[entry.Key] = entry.Value;
-                    }
-                }
-                else
-                {
-                    dictionary.Add(entry.Key, entry.Value);
-                }
+                dictionary.AddIfNotExists(entry.Key, entry.Value, overrideEntries);
             }
         }
 

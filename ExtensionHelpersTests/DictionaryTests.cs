@@ -17,6 +17,15 @@ namespace ExtensionHelpers.Tests
         }
 
         [TestMethod]
+        public void DeSerializeDictionaryTest()
+        {
+            var list = testDictionary.Serialize();
+            var dictionary = list.DeSerialize();
+            Assert.IsTrue(dictionary.Count == testDictionary.Count);
+            Assert.IsTrue(dictionary[1] == "Bob");
+        }
+
+        [TestMethod]
         public void AddRangeDictionaryNoOverrideTest()
         {
             testDictionary.AddRange(testDictionary2, false);
