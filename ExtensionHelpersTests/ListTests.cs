@@ -32,11 +32,38 @@ namespace ExtensionHelpers.Tests
             Assert.IsTrue(testList.Contains("John"));
         }
 
+        [TestMethod]
+        public void IsEqualTo_AreEqual()
+        {
+            Assert.IsTrue(testList.IsEqualTo(testList2));
+        }
+
+        [TestMethod]
+        public void IsEqualTo_NotEqual()
+        {
+            Assert.IsFalse(testList.IsEqualTo(testList3));
+        }
+
         private List<string> testList = new List<string>
         {
             { "Bob" },
             { "Sally" },
             { "Joe" }
+        };
+
+        private List<string> testList2 = new List<string>
+        {
+            { "Joe" },
+            { "Bob" },
+            { "Sally" }
+        };
+
+        private List<string> testList3 = new List<string>
+        {
+            { "Joe" },
+            { "Bob" },
+            { "Sally" },
+            { "Jane" }
         };
     }
 }
