@@ -1,9 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ExtensionHelpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ExtensionHelpers.Tests
 {
@@ -77,6 +73,22 @@ namespace ExtensionHelpers.Tests
         public void SurroundStringTest()
         {
             Assert.IsTrue(stringText.Surround("**") == "**text**");
+        }
+
+        [TestMethod()]
+        public void CaseInsensitiveReplaceTest_Recursive()
+        {
+            string replaceText = "banana";
+
+            Assert.IsTrue(replaceText.Replace("AN", "banana", StringComparison.InvariantCultureIgnoreCase) == "bbananabananaa");
+        }
+
+        [TestMethod()]
+        public void CaseInsensitiveReplaceTest_NotRecursive()
+        {
+            string replaceText = "banana";
+
+            Assert.IsTrue(replaceText.Replace("AN", "banana", StringComparison.InvariantCultureIgnoreCase, false) == "bbananaana");
         }
     }
 }

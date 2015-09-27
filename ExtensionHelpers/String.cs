@@ -112,5 +112,37 @@ namespace ExtensionHelpers
         {
             return string.Format("{0}{1}{0}", surroundWith, value);
         }
+
+        /// </summary>
+        /// <param name="source">The source string.</param>
+        /// <param name="oldValue">The string to be replaced.</param>
+        /// <param name="newValue">The string to replace all occurences of oldValue.</param>
+        /// <param name="comparison">The StringComparison to use.</param>
+        /// <param name="recursive">True to replace all instances of oldValue, False to replace only the first instance of oldValue.</param>
+        /// <returns>
+        /// A string that is equivalent to the current string except that all instances of
+        /// oldValue are replaced with newValue.
+        /// </returns>
+        public static string Replace(this string source, string oldValue, string newValue, StringComparison comparison, bool recursive = true)
+        {
+            int index = source.IndexOf(oldValue, comparison);
+
+            source.Replace("a", "b");
+
+            while (index > -1)
+            {
+                source = source.Remove(index, oldValue.Length);
+                source = source.Insert(index, newValue);
+
+                if (!recursive)
+                {
+                    return source;
+                }
+
+                index = source.IndexOf(oldValue, index + newValue.Length, comparison);
+            }
+
+            return source;
+        }
     }
 }
