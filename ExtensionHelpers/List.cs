@@ -40,7 +40,7 @@ namespace ExtensionHelpers
         /// <param name="list1">The first list.</param>
         /// <param name="list2">The list to compare with.</param>
         /// <returns>True if the lists match, false otherwise.</returns>
-        public static bool IsEqualTo<T>(this List<T> list1, List<T> list2)
+        public static bool IsEqualTo<T>(this IList<T> list1, IList<T> list2)
         {
             if (list1.Count != list2.Count)
             {
