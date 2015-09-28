@@ -36,12 +36,14 @@ namespace ExtensionHelpers.Tests
         public void IsEqualTo_AreEqual()
         {
             Assert.IsTrue(testList.IsEqualTo(testList2));
+            Assert.AreEqual(3, testList2.Count);
         }
 
         [TestMethod]
         public void IsEqualTo_NotEqual()
         {
             Assert.IsFalse(testList.IsEqualTo(testList3));
+            Assert.AreEqual(4, testList3.Count);
         }
 
         private List<string> testList = new List<string>
