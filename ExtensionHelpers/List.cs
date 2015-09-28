@@ -47,12 +47,14 @@ namespace ExtensionHelpers
                 return false;
             }
 
+            IList<T> list3 = list2.CopyByValue();
+
             foreach (var item in list1)
             {
                 int index = -1;
-                for (int x = 0; x < list2.Count; x++)
+                for (int x = 0; x < list3.Count; x++)
                 {
-                    if (list2[x].Equals(item))
+                    if (list3[x].Equals(item))
                     {
                         index = x;
                     }
@@ -60,7 +62,7 @@ namespace ExtensionHelpers
 
                 if (index > -1)
                 {
-                    list2.RemoveAt(index);
+                    list3.RemoveAt(index);
                 }
                 else
                 {
@@ -68,7 +70,7 @@ namespace ExtensionHelpers
                 }
             }
 
-            return !list2.Any();
+            return !list3.Any();
         }
     }
 }
