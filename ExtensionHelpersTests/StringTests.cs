@@ -90,5 +90,69 @@ namespace ExtensionHelpers.Tests
 
             Assert.IsTrue(replaceText.Replace("AN", "banana", StringComparison.InvariantCultureIgnoreCase, false) == "bbananaana");
         }
+
+        [TestMethod]
+        public void CaseInsensitiveReplaceTest_ReplaceIsNull_OldNotEmpty_Recursive()
+        {
+            string replaceText = null;
+
+            Assert.IsTrue(replaceText.Replace("AN", "banana", StringComparison.InvariantCultureIgnoreCase) == null);
+        }
+
+        [TestMethod]
+        public void CaseInsensitiveReplaceTest_ReplaceIsNull_OldNotEmpty_NotRecursive()
+        {
+            string replaceText = null;
+
+            Assert.IsTrue(replaceText.Replace("AN", "banana", StringComparison.InvariantCultureIgnoreCase, false) == null);
+        }
+
+        [TestMethod]
+        public void CaseInsensitiveReplaceTest_ReplaceIsNull_OldEmpty_Recursive()
+        {
+            string replaceText = null;
+
+            Assert.IsTrue(replaceText.Replace(string.Empty, "banana", StringComparison.InvariantCultureIgnoreCase) == "banana");
+        }
+
+        [TestMethod]
+        public void CaseInsensitiveReplaceTest_ReplaceIsNull_OldEmpty_NotRecursive()
+        {
+            string replaceText = null;
+
+            Assert.IsTrue(replaceText.Replace(string.Empty, "banana", StringComparison.InvariantCultureIgnoreCase, false) == "banana");
+        }
+
+        [TestMethod]
+        public void CaseInsensitiveReplaceTest_OldIsNull_Recursive()
+        {
+            string replaceText = "banana";
+
+            Assert.IsTrue(replaceText.Replace(null, "AN", StringComparison.InvariantCultureIgnoreCase) == "banana");
+        }
+
+        [TestMethod]
+        public void CaseInsensitiveReplaceTest_OldIsNull_NotRecursive()
+        {
+            string replaceText = "banana";
+
+            Assert.IsTrue(replaceText.Replace(null, "AN", StringComparison.InvariantCultureIgnoreCase, false) == "banana");
+        }
+
+        [TestMethod]
+        public void CaseInsensitiveReplaceTest_NewIsNull_Recursive()
+        {
+            string replaceText = "banana";
+
+            Assert.IsTrue(replaceText.Replace("AN", null, StringComparison.InvariantCultureIgnoreCase) == "ba");
+        }
+
+        [TestMethod]
+        public void CaseInsensitiveReplaceTest_NewIsNull_NotRecursive()
+        {
+            string replaceText = "banana";
+
+            Assert.IsTrue(replaceText.Replace("AN", null, StringComparison.InvariantCultureIgnoreCase, false) == "bana");
+        }
     }
 }

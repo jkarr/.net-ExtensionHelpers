@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\SkipReflectiveCompare.cs" />
+    <Compile Include="Boolean.cs" />
     <Compile Include="Datetime.cs" />
     <Compile Include="Decimal.cs" />
     <Compile Include="Dictionary.cs" />
@@ -50,6 +52,7 @@
     <Compile Include="List.cs" />
     <Compile Include="Number.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reflection.cs" />
     <Compile Include="String.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

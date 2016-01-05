@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ExtensionHelpers
 {
@@ -76,6 +74,56 @@ namespace ExtensionHelpers
             {
                 dictionary.Add(key, value);
             }
+        }
+
+        /// <summary>
+        /// Compares Two Dictionaries For Equality.  Order of entries doesn't matter.
+        /// </summary>
+        /// <param name="dictionary1">The first Dictionary.</param>
+        /// <param name="dictionary2">The second Dictionary.</param>
+        /// <returns>True if both dictionaries are the same.  False otherwise.</returns>
+        public static bool IsEqualTo<T1, T2>(this IDictionary<T1, T2> dictionary1, Dictionary<T1, T2> dictionary2)
+        {
+            if (dictionary1 == null)
+            {
+                dictionary1 = new Dictionary<T1, T2>();
+            }
+
+            if (dictionary2 == null)
+            {
+                dictionary2 = new Dictionary<T1, T2>();
+            }
+
+            if (!dictionary1.Any() && !dictionary2.Any())
+            {
+                return true;
+            }
+
+            if (dictionary1.Count != dictionary2.Count)
+            {
+                return false;
+            }
+
+            Dictionary<T1, T2> dictionary3 = dictionary2.CopyByValue();
+
+            foreach (var item in dictionary1)
+            {
+                var match = dictionary3[item.Key];
+
+                if (match == null)
+                {
+                    return false;
+                }
+
+                if (!match.Equals(item.Value))
+                {
+                    return false;
+                }
+
+                dictionary3.Remove(item.Key);
+            }
+
+            return !dictionary3.Any();
         }
     }
 }

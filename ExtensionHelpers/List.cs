@@ -13,7 +13,7 @@ namespace ExtensionHelpers
         public static IList<T> CopyByValue<T>(this IList<T> list)
         {
             var newList = new List<T>();
-            foreach(var item in list)
+            foreach (var item in list)
             {
                 newList.Add(item);
             }
@@ -28,7 +28,7 @@ namespace ExtensionHelpers
         /// <param name="value">The value.</param>
         public static void AddIfNotExists<T>(this IList<T> list, T value)
         {
-            if(!list.Contains(value))
+            if (!list.Contains(value))
             {
                 list.Add(value);
             }
@@ -42,6 +42,21 @@ namespace ExtensionHelpers
         /// <returns>True if the lists match, false otherwise.</returns>
         public static bool IsEqualTo<T>(this IList<T> list1, IList<T> list2)
         {
+            if (list1 == null)
+            {
+                list1 = new List<T>();
+            }
+
+            if (list2 == null)
+            {
+                list2 = new List<T>();
+            }
+
+            if (!list1.Any() && !list2.Any())
+            {
+                return true;
+            }
+
             if (list1.Count != list2.Count)
             {
                 return false;
