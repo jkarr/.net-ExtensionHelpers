@@ -1,7 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
-using ExtensionHelpers;
 
 namespace ExtensionHelpers.Tests
 {
@@ -44,6 +43,29 @@ namespace ExtensionHelpers.Tests
         {
             Assert.IsFalse(testList.IsEqualTo(testList3));
             Assert.AreEqual(4, testList3.Count);
+        }
+
+        [TestMethod]
+        public void IsEqualTo_OriginalIsNull()
+        {
+            List<string> nullList = null;
+            Assert.IsFalse(nullList.IsEqualTo(testList3));
+        }
+
+        [TestMethod]
+        public void IsEqualTo_CompareIsNull()
+        {
+            List<string> nullList = null;
+            Assert.IsFalse(testList2.IsEqualTo(nullList));
+        }
+
+        [TestMethod]
+        public void IsEqualTo_BothIsNull()
+        {
+            List<string> nullList1 = null;
+            List<string> nullList2 = null;
+
+            Assert.IsTrue(nullList1.IsEqualTo(nullList2));
         }
 
         private List<string> testList = new List<string>

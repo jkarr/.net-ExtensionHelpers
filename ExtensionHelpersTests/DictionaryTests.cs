@@ -1,6 +1,5 @@
-﻿using ExtensionHelpers;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
 namespace ExtensionHelpers.Tests
@@ -71,6 +70,40 @@ namespace ExtensionHelpers.Tests
             Assert.IsTrue(testDictionary.ContainsKey(4) && testDictionary[4] == "Amy");
         }
 
+        [TestMethod]
+        public void IsEqualTo_Equal()
+        {
+            Assert.IsTrue(testDictionary.IsEqualTo(testDictionary3));
+        }
+
+        [TestMethod]
+        public void IsEqualTo_NotEqual()
+        {
+            Assert.IsFalse(testDictionary.IsEqualTo(testDictionary2));
+        }
+
+        [TestMethod]
+        public void IsEqualTo_OriginalIsNull()
+        {
+            Dictionary<int, string> nullDictionary = null;
+            Assert.IsFalse(nullDictionary.IsEqualTo(testDictionary2));
+        }
+
+        [TestMethod]
+        public void IsEqualTo_CompareIsNull()
+        {
+            Dictionary<int, string> nullDictionary = null;
+            Assert.IsFalse(testDictionary2.IsEqualTo(nullDictionary));        
+        }
+
+        [TestMethod]
+        public void IsEqualTo_BothAreNull()
+        {
+            Dictionary<int, string> nullDictionary = null;
+            Dictionary<int, string> nullDictionary2 = null;
+            Assert.IsTrue(nullDictionary.IsEqualTo(nullDictionary2));
+        }
+
         private Dictionary<int, string> testDictionary = new Dictionary<int, string>
         {
             { 1, "Bob" },
@@ -83,6 +116,13 @@ namespace ExtensionHelpers.Tests
             { 1, "Cain" },
             { 4, "Sue" },
             { 5, "Allen" }
+        };
+
+        private Dictionary<int, string> testDictionary3 = new Dictionary<int, string>
+        {
+            { 1, "Bob" },
+            { 2, "Alice" },
+            { 3, "John" }
         };
     }
 }

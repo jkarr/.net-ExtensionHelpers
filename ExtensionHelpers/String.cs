@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace ExtensionHelpers
@@ -125,6 +122,33 @@ namespace ExtensionHelpers
         /// </returns>
         public static string Replace(this string source, string oldValue, string newValue, StringComparison comparison, bool recursive = true)
         {
+            if (newValue == null)
+            {
+                newValue = string.Empty;
+            }
+
+            if (source.IsNullOrEmpty())
+            {
+                if (oldValue.IsNullOrEmpty())
+                {
+                    return newValue;
+                }
+                else
+                {
+                    return source;
+                }
+            }
+
+            if (oldValue.IsNullOrEmpty())
+            {
+                return source;
+            }
+
+            if (newValue == null)
+            {
+                newValue = string.Empty;
+            }
+
             int index = source.IndexOf(oldValue, comparison);
 
             source.Replace("a", "b");
