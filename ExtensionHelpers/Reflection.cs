@@ -30,14 +30,19 @@ namespace ExtensionHelpers
         // http://stackoverflow.com/a/17139700/403404
         private static bool isCollection(this object obj)
         {
-            return obj.GetType().GetInterfaces()
-                    .Any(i => (
-                            i.Name == "ICollection" || 
-                            i.Name == "IEnumerable" || 
-                            i.Name == "IList") || 
-                            (i.IsGenericTypeDefinition && 
-                                (i.GetGenericTypeDefinition() == typeof(ICollection<>) || 
-                                i.GetGenericTypeDefinition() == typeof(IEnumerable<>) || i.GetGenericTypeDefinition() == typeof(IList<>))));
+            if (obj.GetType() != typeof(string))
+            {
+                return obj.GetType().GetInterfaces()
+                        .Any(i => (
+                                i.Name == "ICollection" ||
+                                i.Name == "IEnumerable" ||
+                                i.Name == "IList") ||
+                                (i.IsGenericTypeDefinition &&
+                                    (i.GetGenericTypeDefinition() == typeof(ICollection<>) ||
+                                    i.GetGenericTypeDefinition() == typeof(IEnumerable<>) || i.GetGenericTypeDefinition() == typeof(IList<>))));
+            }
+
+            return false;
         }
 
         public static List<MemberComparison> ReflectiveCompare<T>(this T x, T y)
@@ -72,7 +77,7 @@ namespace ExtensionHelpers
                     var xValue = field.GetValue(x);
                     var yValue = field.GetValue(y);
 
-                    if (xValue.isCollection())
+                    if (xValue != null && xValue.isCollection())
                     {
                         IList xCollection = (IList)xValue;
                         IList yCollection = (IList)yValue;
@@ -89,12 +94,13 @@ namespace ExtensionHelpers
                 else if (m.MemberType == MemberTypes.Property)
                 {
                     var prop = (PropertyInfo)m;
-                    if (prop.CanRead && prop.GetGetMethod().GetParameters().Length == 0)
+                    var getMethod = prop.GetGetMethod();
+                    if (prop.CanRead && (getMethod != null && getMethod.GetParameters().Length == 0))
                     {
                         var xValue = prop.GetValue(x, null);
                         var yValue = prop.GetValue(y, null);
 
-                        if (xValue.isCollection())
+                        if (xValue != null && xValue.isCollection())
                         {
                             /// http://stackoverflow.com/a/632618/403404
                             var xEnumerator = ((IEnumerable)xValue).GetEnumerator();

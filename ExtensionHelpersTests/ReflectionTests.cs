@@ -27,6 +27,12 @@ namespace ExtensionHelpersTests
             Assert.IsTrue(complex1.ReflectiveCompare(complex3).Any());
         }
 
+        [TestMethod]
+        public void ReflectiveCompare_List_Different()
+        {
+            Assert.IsTrue(listA.ReflectiveCompare(listB).Any());
+        }
+
         private Complex complex1 = new Complex
         {
             X = 12,
@@ -69,6 +75,19 @@ namespace ExtensionHelpersTests
                 { 8 },
                 { 10 }
             }
+        };
+
+        private List<string> listA = new List<string>
+        {
+            { "one" },
+            { "two" }
+        };
+
+        private List<string> listB = new List<string>
+        {
+            { "one" },
+            { "two" },
+            { "three" }
         };
     }
 
