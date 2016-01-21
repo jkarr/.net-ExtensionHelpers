@@ -148,7 +148,6 @@ namespace ExtensionHelpers
 
             IList<T> xCopy = x.CopyByValue();
             IList<T> yCopy = y.CopyByValue();
-            IList<T> common = new List<T>();
 
             // Step 1, Remove common items from x and y
             // Step 2, Note the lists are different
@@ -158,25 +157,23 @@ namespace ExtensionHelpers
                 int index = -1;
                 int i = 0;
 
-                while (index < 0 && i < yCopy.Count)
+                while (index < 0 && i < y.Count)
                 {
-                    if (item.ReflectiveCompare(yCopy[i]).Count > 0)
+                    if (ReflectiveCompare(item, y[i]).Count == 0)
                     {
                         index = i;
-                        common.Add(item);
+                        xCopy.Remove(item);
+                        yCopy.Remove(y[i]);
                     }
 
                     i++;
                 }
             }
 
-            foreach (var item in common)
+            if (xCopy.Count != 0 || yCopy.Count != 0)
             {
-                xCopy.Remove(item);
-                yCopy.Remove(item);
+                list.Add(new MemberComparison(typeof(T).Name, xCopy, yCopy));
             }
-
-            list.Add(new MemberComparison(typeof(T).Name, xCopy, yCopy));
 
             return list;
         }
