@@ -152,21 +152,17 @@ namespace ExtensionHelpers
             // Step 1, Remove common items from x and y
             // Step 2, Note the lists are different
 
-            foreach (var item in x)
+            foreach (var itemx in x)
             {
-                int index = -1;
-                int i = 0;
-
-                while (index < 0 && i < y.Count)
+                foreach (var itemy in y)
                 {
-                    if (ReflectiveCompare(item, y[i]).Count == 0)
+                    if (!itemx.ReflectiveCompare(itemy).Any())
                     {
-                        index = i;
-                        xCopy.Remove(item);
-                        yCopy.Remove(y[i]);
-                    }
+                        xCopy.Remove(itemx);
+                        yCopy.Remove(itemy);
 
-                    i++;
+                        break;
+                    }
                 }
             }
 
