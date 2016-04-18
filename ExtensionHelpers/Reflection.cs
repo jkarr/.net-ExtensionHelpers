@@ -137,7 +137,7 @@ namespace ExtensionHelpers
             return list;
         }
 
-        public static List<MemberComparison> ReflectiveCompare<T>(this List<T> x, List<T> y)
+        public static List<MemberComparison> ReflectiveCompare2<T>(this List<T> x, List<T> y)
         {
             List<MemberComparison> list = new List<MemberComparison>();
 
@@ -149,17 +149,22 @@ namespace ExtensionHelpers
             IList<T> xCopy = x.CopyByValue();
             IList<T> yCopy = y.CopyByValue();
 
+            // Some lists contain duplicate items.  We only want to count an item as "matched" once, so we need a dictionary to keep track.
+            Dictionary<T, bool> yDictionary = y.ToDictionary(k => k, v => false);
+
             // Step 1, Remove common items from x and y
             // Step 2, Note the lists are different
 
-            foreach (var itemx in x)
+            foreach (var xItem in x)
             {
-                foreach (var itemy in y)
+                var nonMatches = yDictionary.Where(k => k.Value == false).Select(s => s.Key).ToList();
+                foreach (var yItem in nonMatches)
                 {
-                    if (!itemx.ReflectiveCompare(itemy).Any())
+                    if (!xItem.ReflectiveCompare(yItem).Any())
                     {
-                        xCopy.Remove(itemx);
-                        yCopy.Remove(itemy);
+                        xCopy.Remove(xItem);
+                        yCopy.Remove(yItem);
+                        yDictionary[yItem] = true;
 
                         break;
                     }
